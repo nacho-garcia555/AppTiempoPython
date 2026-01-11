@@ -1,4 +1,3 @@
-# main.py - Versión Final Estética (CORREGIDA)
 
 import requests
 import tkinter as tk
@@ -6,18 +5,17 @@ from tkinter import messagebox
 from PIL import Image, ImageTk
 import io
 
-# --- CONFIGURACIÓN ---
-API_KEY = "124c1c5a0938ea9c2bb157e1102fc70b"  # <-- ¡PON TU CLAVE AQUÍ!
-BACKGROUND_IMAGE_PATH = "imagenProyecto.jpg" # Nombre de tu imagen de fondo
+# CONFIGURACIÓN 
+API_KEY = "124c1c5a0938ea9c2bb157e1102fc70b"  
+BACKGROUND_IMAGE_PATH = "imagenProyecto.jpg" 
 
-# --- FUENTES Y COLORES (para texto sobre imagen) --
+# FUENTES Y COLORES (para texto sobre imagen) 
 FUENTE_TITULO = ("Helvetica", 26, "bold")
 FUENTE_PRINCIPAL = ("Helvetica", 14)
 FUENTE_SECUNDARIA = ("Helvetica", 11)
 COLOR_TEXTO_CLARO = "#000000" # Blanco
 COLOR_TEXTO_SUAVE = "#000000" # Blanco grisáceo
 
-# --- LÓGICA DE LA API (sin cambios) ---
 def consultar_tiempo(ciudad):
     if not ciudad:
         return None
@@ -31,7 +29,7 @@ def consultar_tiempo(ciudad):
     except requests.exceptions.RequestException:
         return None
 
-# --- LÓGICA DE LA INTERFAZ GRÁFICA ---
+# LÓGICA DE LA INTERFAZ GRÁFICA 
 def mostrar_resultado():
     ciudad = entrada_ciudad.get()
     datos = consultar_tiempo(ciudad)
@@ -53,7 +51,7 @@ def mostrar_resultado():
             respuesta_icono.raw.decode_content = True
             imagen_data = io.BytesIO(respuesta_icono.content)
             imagen = Image.open(imagen_data)
-            # Redimensionamos el icono para que no sea gigante
+            # Redimensionar el icono para que no sea gigante
             imagen = imagen.resize((120, 120), Image.Resampling.LANCZOS)
             foto = ImageTk.PhotoImage(imagen)
             
@@ -72,13 +70,13 @@ def mostrar_resultado():
         etiqueta_viento.config(text="Viento: -- m/s")
         etiqueta_icono.config(image="")
 
-# --- CREACIÓN DE LA VENTANA Y WIDGETS ---
+# CREACIÓN DE LA VENTANA Y WIDGETS
 ventana_principal = tk.Tk()
 ventana_principal.title("App del Tiempo")
 ventana_principal.geometry("450x600")
 ventana_principal.resizable(False, False)
 
-# --- CARGAR Y PONER LA IMAGEN DE FONDO ---
+# CARGAR Y PONER LA IMAGEN DE FONDO
 try:
     bg_image_pil = Image.open(BACKGROUND_IMAGE_PATH)
     bg_image = ImageTk.PhotoImage(bg_image_pil)
@@ -91,15 +89,13 @@ except FileNotFoundError:
     exit()
 
 
-# --- WIDGETS SOBRE EL FONDO (usando 'place') ---
+
 
 # Título
-# --- CORRECCIÓN AQUÍ ---
 etiqueta_titulo = tk.Label(ventana_principal, text="App del Tiempo", font=FUENTE_TITULO, fg=COLOR_TEXTO_CLARO)
 etiqueta_titulo.place(relx=0.5, rely=0.08, anchor="center")
 
 # Entrada de ciudad
-# --- CORRECCIÓN AQUÍ ---
 frame_entrada = tk.Frame(ventana_principal, highlightbackground=COLOR_TEXTO_CLARO, highlightthickness=1)
 frame_entrada.place(relx=0.5, rely=0.18, anchor="center", width=300, height=40)
 
@@ -110,33 +106,26 @@ entrada_ciudad.bind("<Return>", lambda event: mostrar_resultado())
 boton_consultar = tk.Button(ventana_principal, text="Consultar", command=mostrar_resultado, font=FUENTE_PRINCIPAL, bg="#3498db", fg="white", bd=0, activebackground="#2980b9")
 boton_consultar.place(relx=0.5, rely=0.26, anchor="center", width=150, height=40)
 
-# --- ÁREA DE RESULTADOS ---
-# --- CORRECCIÓN AQUÍ ---
+# ÁREA DE RESULTADOS 
 frame_resultados = tk.Frame(ventana_principal)
 frame_resultados.place(relx=0.5, rely=0.5, anchor="center")
 
-# --- CORRECCIÓN AQUÍ ---
 etiqueta_icono = tk.Label(frame_resultados)
 etiqueta_icono.grid(row=0, column=0, padx=10)
 
-# --- CORRECCIÓN AQUÍ ---
 etiqueta_temp = tk.Label(frame_resultados, text="--°C", font=("Helvetica", 48, "bold"), fg=COLOR_TEXTO_CLARO)
 etiqueta_temp.grid(row=0, column=1)
 
 # Resto de información
-# --- CORRECCIÓN AQUÍ ---
 etiqueta_descripcion = tk.Label(ventana_principal, text="Desconocido", font=FUENTE_PRINCIPAL, fg=COLOR_TEXTO_SUAVE)
 etiqueta_descripcion.place(relx=0.5, rely=0.68, anchor="center")
 
-# --- CORRECCIÓN AQUÍ ---
 etiqueta_sensacion = tk.Label(ventana_principal, text="Sensación: --°C", font=FUENTE_SECUNDARIA, fg=COLOR_TEXTO_SUAVE)
 etiqueta_sensacion.place(relx=0.5, rely=0.75, anchor="center")
 
-# --- CORRECCIÓN AQUÍ ---
 etiqueta_humedad = tk.Label(ventana_principal, text="Humedad: --%", font=FUENTE_SECUNDARIA, fg=COLOR_TEXTO_SUAVE)
 etiqueta_humedad.place(relx=0.5, rely=0.82, anchor="center")
 
-# --- CORRECCIÓN AQUÍ ---
 etiqueta_viento = tk.Label(ventana_principal, text="Viento: -- m/s", font=FUENTE_SECUNDARIA, fg=COLOR_TEXTO_SUAVE)
 etiqueta_viento.place(relx=0.5, rely=0.89, anchor="center")
 
