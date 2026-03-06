@@ -1,4 +1,5 @@
 App del Tiempo en Python
+
 Una aplicación de escritorio simple y visualmente atractiva para consultar el tiempo actual en cualquier ciudad del mundo. Hecha con Python, la librería Tkinter para la interfaz gráfica y la API de OpenWeatherMap para obtener los datos en tiempo real.
 
 🌟 Características
